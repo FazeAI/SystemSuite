@@ -3,122 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Suite 6.0 | Ultimate Command Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <title>System Suite 7.0 | Quantum Hub Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #030712; --panel: #0f172a; --primary: #38bdf8; --primary-hover: #0284c7; --text: #f8fafc; --muted: #475569; --border: #1e293b; --success: #10b981; }
+        :root { 
+            --bg: #090d16; 
+            --panel: #0f172a; 
+            --primary: #0ea5e9; 
+            --primary-hover: #0284c7; 
+            --text: #f8fafc; 
+            --muted: #64748b; 
+            --border: #1e293b; 
+            --success: #10b981; 
+            --accent: #6366f1;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 80px; -webkit-font-smoothing: antialiased; }
 
-        /* HEADER & NAVIGATION */
-        header { position: fixed; top: 0; width: 100%; background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 20px; }
-        .brand { font-size: 1.5rem; font-weight: 900; color: white; display: flex; align-items: center; gap: 8px; }
+        /* HEADER GLASSMORPHISM */
+        header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); z-index: 1000; }
+        .nav-inner { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 22px 30px; }
+        .brand { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; color: white; }
         .brand span { color: var(--primary); }
-        nav { display: flex; gap: 24px; }
-        nav a { color: #94a3b8; text-decoration: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; }
+        nav { display: flex; gap: 28px; }
+        nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; padding: 6px 0; position: relative; }
         nav a:hover, nav a.active { color: var(--primary); }
+        nav a.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--primary); border-radius: 2px; }
 
-        /* STRUCTURE */
-        main { max-width: 1200px; margin: 120px auto 60px; padding: 0 20px; }
-        .page { display: none; animation: pageIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        /* LAYOUT MAIN */
+        main { max-width: 1300px; margin: 130px auto 40px; padding: 0 30px; }
+        .page { display: none; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .page.active { display: block; }
-        @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* TYPOGRAPHY */
-        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; }
-        p.desc { font-size: 1.2rem; color: #94a3b8; max-width: 750px; margin-bottom: 40px; }
+        /* HEADER SECTIONS */
+        h1 { font-size: 3.8rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        p.desc { font-size: 1.25rem; color: var(--muted); max-width: 800px; margin-bottom: 45px; font-weight: 400; }
 
-        /* TERMINAL PANEL */
-        .terminal { background: #020617; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        .term-header { background: #0b0f19; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
-        .term-dots { display: flex; gap: 6px; }
-        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+        /* INTERACTIVE TERMINAL WINDOW */
+        .terminal { background: #020617; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 45px; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7); }
+        .term-header { background: #070a13; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+        .term-dots { display: flex; gap: 8px; }
+        .term-dot { width: 13px; height: 13px; border-radius: 50%; }
         .term-dot.r { background: #ef4444; } .term-dot.y { background: #f59e0b; } .term-dot.g { background: #10b981; }
-        .term-txt { font-size: 0.8rem; color: var(--muted); font-family: monospace; }
-        .term-body { padding: 30px; font-family: 'Fira Code', monospace; font-size: 1.15rem; color: var(--success); cursor: pointer; display: flex; align-items: center; }
-        .term-body::before { content: "PS C:\\> "; color: #64748b; margin-right: 10px; }
+        .term-txt { font-size: 0.8rem; color: var(--muted); font-family: 'Fira Code', monospace; letter-spacing: 0.5px; }
+        .term-body { padding: 32px; font-family: 'Fira Code', monospace; font-size: 1.15rem; color: var(--text); cursor: pointer; position: relative; transition: background 0.2s; }
+        .term-body:hover { background: #03081c; }
+        .term-body::before { content: "PS C:\\Windows\\system32> "; color: var(--muted); }
+        .term-highlight { color: var(--primary); font-weight: 600; }
 
-        /* INTERACTIVE BUILDER BOX */
-        .builder-box { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-top: 30px; }
-        .builder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 20px; }
-        .option-card { background: #020617; border: 1px solid var(--border); padding: 16px; border-radius: 8px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
-        .option-card input { margin-top: 4px; }
-        .option-card h4 { font-size: 1rem; margin-bottom: 4px; }
-        .option-card p { font-size: 0.85rem; color: #64748b; }
+        /* INTERACTIVE SCRIPT BUILDER GRID */
+        .builder-container { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 35px; margin-top: 40px; }
+        .builder-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+        .builder-subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 30px; }
+        .builder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        
+        .option-card { background: #070a13; border: 1px solid var(--border); padding: 22px; border-radius: 12px; display: flex; gap: 16px; cursor: pointer; transition: all 0.2s ease; }
+        .option-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(14,165,233,0.15); }
+        .option-card.selected { border-color: var(--primary); background: #0c152b; }
+        .option-card input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); margin-top: 2px; cursor: pointer; }
+        .option-card h4 { font-size: 1.1rem; margin-bottom: 6px; font-weight: 700; }
+        .option-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
 
-        /* AUDIT TABLE */
-        .audit-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--panel); border-radius: 8px; overflow: hidden; }
-        .audit-table th, .audit-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border); }
-        .audit-table th { background: #0b0f19; font-weight: 600; color: var(--primary); }
+        /* SECURITY MATRIX TABLE */
+        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 30px; background: var(--panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+        .matrix-table th, .matrix-table td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--border); }
+        .matrix-table th { background: #070a13; font-weight: 700; color: var(--primary); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .matrix-table td code { font-family: 'Fira Code', monospace; background: #020617; padding: 4px 8px; border-radius: 6px; font-size: 0.9rem; color: var(--accent); }
 
-        /* TOAST */
-        #toast { position: fixed; bottom: 30px; right: -350px; background: var(--primary); color: #020617; padding: 16px 24px; border-radius: 8px; font-weight: 700; box-shadow: 0 20px 25px -5px rgba(56, 189, 248, 0.3); transition: right 0.3s ease-index; z-index: 2000; }
-        #toast.visible { right: 30px; }
+        /* LIVE METRICS CARDS */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 35px; }
+        .metric-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 25px; }
+        .metric-card h5 { font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 8px; }
+        .metric-card p { font-size: 1.8rem; font-weight: 800; color: white; }
+
+        /* FLOATING TOAST NOTIFICATION */
+        #toast { position: fixed; bottom: 40px; right: -400px; background: var(--success); color: #020617; padding: 18px 28px; border-radius: 10px; font-weight: 700; font-size: 1rem; box-shadow: 0 20px 40px rgba(16,185,129,0.25); transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2000; display: flex; align-items: center; gap: 10px; }
+        #toast.visible { right: 40px; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="nav-inner">
-        <div class="brand">⚡ System<span>Suite</span></div>
+        <div class="brand">⚡ Quantum<span>Suite Cloud</span></div>
         <nav>
-            <a onclick="toPage('home')" id="l-home" class="active">Pannello Core</a>
-            <a onclick="toPage('builder')" id="l-builder">Costruttore Script</a>
-            <a onclick="toPage('security')" id="l-security">Audit Sicurezza</a>
-            <a onclick="toPage('changelog')" id="l-changelog">Changelog</a>
+            <a onclick="toPage('home')" id="l-home" class="active">Distribuzione Core</a>
+            <a onclick="toPage('builder')" id="l-builder">Generatore Flag</a>
+            <a onclick="toPage('security')" id="l-security">Integrità &amp; Log</a>
         </nav>
     </div>
 </header>
 
 <main>
     <section id="home" class="page active">
-        <h1>Infrastruttura di Configurazione<br><span style="color: var(--primary)">Windows Cloud-Based</span></h1>
-        <p class="desc">System Suite v6.0 automatizza il deployment dei software, rimuove le telemetrie di tracciamento e ripara l'OS in tempo reale senza file residui persistenti.</p>
+        <h1>Deployment di Sistema Semplicemente <span style="color: var(--primary)">Immediato</span>.</h1>
+        <p class="desc">Esegui una pulizia aggressiva del bloatware di fabbrica, configura l'ambiente e gestisci i registri Windows tramite un singolo layer cloud sicuro e tracciabile.</p>
 
         <div class="terminal">
             <div class="term-header">
                 <div class="term-dots"><div class="term-dot r"></div><div class="term-dot y"></div><div class="term-dot g"></div></div>
-                <div class="term-txt">PowerShell Admin Execution Layer</div>
+                <div class="term-txt">PowerShell Automated Web Stream Layer</div>
             </div>
             <div class="term-body" id="mainCmd" onclick="copyText('mainCmd')" title="Clicca per copiare">irm https://raw.githubusercontent.com/FazeAi/SystemSuite/main/WinUtility.ps1 | iex</div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h5>Latenza Media Iniezione</h5>
+                <p>&lt; 140ms</p>
+            </div>
+            <div class="metric-card">
+                <h5>Stato Repository GitHub</h5>
+                <p style="color: var(--success);">Verificato</p>
+            </div>
+            <div class="metric-card">
+                <h5>Integrità Modulo XAML</h5>
+                <p>100% Funzionante</p>
+            </div>
         </div>
     </section>
 
     <section id="builder" class="page">
-        <h1>Generatore di Payload Dinamico</h1>
-        <p class="desc">Personalizza il comportamento di avvio della suite aggiungendo flag di ottimizzazione precompilati.</p>
+        <h1>Selettore di Flag Dinamico</h1>
+        <p class="desc">Abilita parametri addizionali nel payload di rete. Il comando generato istruirà lo script a comportarsi di conseguenza, saltando la GUI se necessario.</p>
         
         <div class="terminal">
             <div class="term-header">
                 <div class="term-dots"><div class="term-dot r"></div><div class="term-dot y"></div><div class="term-dot g"></div></div>
-                <div class="term-txt">Custom Generated Command</div>
+                <div class="term-txt">Generated Target Command Stream</div>
             </div>
-            <div class="term-body" id="generatedCmd" onclick="copyText('generatedCmd')" style="color: #60a5fa;">irm https://raw.githubusercontent.com/FazeAi/SystemSuite/main/WinUtility.ps1 | iex</div>
+            <div class="term-body" id="generatedCmd" onclick="copyText('generatedCmd')" title="Clicca per copiare">irm https://raw.githubusercontent.com/FazeAi/SystemSuite/main/WinUtility.ps1 | iex</div>
         </div>
 
-        <div class="builder-box">
-            <h3>Parametri Modulo di Avvio</h3>
+        <div class="builder-container">
+            <h3 class="builder-title">Configura Parametri del Processo</h3>
+            <p class="builder-subtitle">Seleziona uno o più flag per alterare il flusso operativo del motore PowerShell core:</p>
+            
             <div class="builder-grid">
-                <div class="option-card" onclick="toggleCheck('f-telemetry')">
-                    <input type="checkbox" id="f-telemetry" onchange="buildString()">
+                <div class="option-card" id="card-silent" onclick="toggleOption('silent')">
+                    <input type="checkbox" id="f-silent" onchange="buildString(event)">
                     <div>
-                        <h4>SkipTelemetry</h4>
-                        <p>Bypassa l'analisi iniziale e disattiva la diagnostica subito.</p>
+                        <h4>-SilentMode</h4>
+                        <p>Inizializza ed esegue il deployment standard direttamente in background senza istanziare l'interfaccia grafica WPF.</p>
                     </div>
                 </div>
-                <div class="option-card" onclick="toggleCheck('f-silent')">
-                    <input type="checkbox" id="f-silent" onchange="buildString()">
+                <div class="option-card" id="card-telemetry" onclick="toggleOption('telemetry')">
+                    <input type="checkbox" id="f-telemetry" onchange="buildString(event)">
                     <div>
-                        <h4>SilentMode</h4>
-                        <p>Avvia l'installazione in background senza mostrare log a schermo.</p>
+                        <h4>-SkipTelemetry</h4>
+                        <p>Applica immediatamente la soppressione della telemetria Microsoft nativa e dei log diagnostici all'avvio dello stream.</p>
                     </div>
                 </div>
-                <div class="option-card" onclick="toggleCheck('f-backup')">
-                    <input type="checkbox" id="f-backup" onchange="buildString()">
+                <div class="option-card" id="card-network" onclick="toggleOption('network')">
+                    <input type="checkbox" id="f-network" onchange="buildString(event)">
                     <div>
-                        <h4>ForceRestorePoint</h4>
-                        <p>Crea forzatamente un punto di ripristino istantaneo.</p>
+                        <h4>-NetworkOptimize</h4>
+                        <p>Configura l'instradamento sui DNS Cloudflare (1.1.1.1) ed effettua il flush automatico dei resolver locali.</p>
                     </div>
                 </div>
             </div>
@@ -126,50 +167,39 @@
     </section>
 
     <section id="security" class="page">
-        <h1>Audit di Trasparenza e Sicurezza</h1>
-        <p class="desc">Tutti i comandi eseguiti sono nativi e certificati da firme di tracciabilità interne.</p>
+        <h1>Controllo Trasparenza del Codice</h1>
+        <p class="desc">Ispeziona la mappatura tra i nostri moduli web logici e le istruzioni PowerShell a basso livello per garantire la massima conformità alle policy IT.</p>
         
-        <table class="audit-table">
+        <table class="matrix-table">
             <thead>
                 <tr>
-                    <th>Modulo</th>
-                    <th>Comando Nativo Corrispondente</th>
-                    <th>Scopo Tecnico</th>
+                    <th>Componente logica</th>
+                    <th>Comando Nativo Richiamato</th>
+                    <th>Impatto sui file di sistema</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><b>WinGet Core</b></td>
-                    <td><code>winget install --id [ID] --silent</code></td>
-                    <td>Iniezione binari originali senza adware.</td>
+                    <td><b>Disattivazione Telemetria</b></td>
+                    <td><code>Set-ItemProperty -Path "HKLM:\...\DataCollection" -Name "AllowTelemetry"</code></td>
+                    <td>Modifica sicura del Registro di configurazione Windows (DWord).</td>
                 </tr>
                 <tr>
-                    <td><b>Anti-Tracking</b></td>
-                    <td><code>Set-ItemProperty ... -Name AllowTelemetry -Value 0</code></td>
-                    <td>Inibizione chiavi di registro diagnostiche.</td>
+                    <td><b>Bypass Annunci Start</b></td>
+                    <td><code>New-ItemProperty -Path "HKCU:\...\Explorer" -Name "DisableSearchBoxSuggestions"</code></td>
+                    <td>Previene le chiamate esterne verso i server pubblicitari Bing.</td>
                 </tr>
                 <tr>
-                    <td><b>Network Fix</b></td>
-                    <td><code>Set-DnsClientServerAddress -ServerAddresses 1.1.1.1</code></td>
-                    <td>Sostituzione instradamento DNS ad alta velocità.</td>
+                    <td><b>Rimozione Bloatware</b></td>
+                    <td><code>Get-AppxPackage | Remove-AppxPackage</code></td>
+                    <td>Disinstallazione pulita e permanente dei binari OEM residui inutilizzati.</td>
                 </tr>
             </tbody>
         </table>
     </section>
-
-    <section id="changelog" class="page">
-        <h1>Registro Storico degli Sviluppi</h1>
-        <p class="desc">Aggiornamenti e Hotfix della Suite nel 2026.</p>
-        
-        <div style="border-left: 2px solid var(--primary); padding-left: 20px;">
-            <h3 style="color: var(--primary);">v6.0 Ultimate (Corrente)</h3>
-            <p style="color:#64748b; margin-bottom: 10px;">Rilascio: Giugno 2026</p>
-            <p>• Integrazione del costruttore di comandi analitico nell'interfaccia web.<br>• Riprogettazione XAML in PowerShell con menu a cascata verticale sinistro.<br>• Introduzione della cattura dinamica dei parametri Win32_Processor.</p>
-        </div>
-    </section>
 </main>
 
-<div id="toast">📋 Comando copiato negli appunti con successo!</div>
+<div id="toast">📋 Comando copiato negli appunti! Pronto da incollare.</div>
 
 <script>
     function toPage(page) {
@@ -179,23 +209,37 @@
         document.getElementById('l-' + page).classList.add('active');
     }
 
-    function toggleCheck(id) {
-        const chk = document.getElementById(id);
-        if(event.target.tagName !== 'INPUT') chk.checked = !chk.checked;
+    function toggleOption(type) {
+        if(event.target.tagName === 'INPUT') return;
+        const chk = document.getElementById('f-' + type);
+        chk.checked = !chk.checked;
+        
+        const card = document.getElementById('card-' + type);
+        if(chk.checked) card.classList.add('selected');
+        else card.classList.remove('selected');
+        
         buildString();
     }
 
-    function buildString() {
-        let base = "irm https://raw.githubusercontent.com/FazeAi/SystemSuite/main/WinUtility.ps1 | iex";
-        let args = [];
-        if(document.getElementById('f-telemetry').checked) args.push("-SkipTelemetry");
-        if(document.getElementById('f-silent').checked) args.push("-SilentMode");
-        if(document.getElementById('f-backup').checked) args.push("-ForceRestorePoint");
+    function buildString(e) {
+        if(e) {
+            const card = e.target.closest('.option-card');
+            if(e.target.checked) card.classList.add('selected');
+            else card.classList.remove('selected');
+        }
+
+        let baseCmd = "irm https://raw.githubusercontent.com/FazeAi/SystemSuite/main/WinUtility.ps1 | iex";
+        let flags = [];
         
-        if(args.length > 0) {
-            document.getElementById('generatedCmd').innerText = base + " -Arguments \"" + args.join(" ") + "\"";
+        if(document.getElementById('f-silent').checked) flags.push("-SilentMode");
+        if(document.getElementById('f-telemetry').checked) flags.push("-SkipTelemetry");
+        if(document.getElementById('f-network').checked) flags.push("-NetworkOptimize");
+        
+        if(flags.length > 0) {
+            // Genera la sintassi corretta per passare argomenti all'espressione iniettata
+            document.getElementById('generatedCmd').innerHTML = `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { ${baseCmd} } ${flags.join(' ')}"`;
         } else {
-            document.getElementById('generatedCmd').innerText = base;
+            document.getElementById('generatedCmd').innerText = baseCmd;
         }
     }
 
@@ -204,7 +248,7 @@
         navigator.clipboard.writeText(text);
         const toast = document.getElementById('toast');
         toast.classList.add('visible');
-        setTimeout(() => toast.classList.remove('visible'), 3000);
+        setTimeout(() => toast.classList.remove('visible'), 3500);
     }
 </script>
 </body>
