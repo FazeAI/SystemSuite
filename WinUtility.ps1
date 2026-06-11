@@ -1,5 +1,5 @@
 # =========================================================
-# SYSTEM SUITE - v5.0 ENTERPRISE EDITION
+# SYSTEM SUITE - v5.0 ENTERPRISE EDITION (HOTFIXED)
 # =========================================================
 Clear-Host
 Write-Host "Avvio System Suite v5.0 Enterprise..." -ForegroundColor Cyan
@@ -55,7 +55,7 @@ Add-Type -AssemblyName PresentationFramework
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     
-                    <StackPanel Grid.Row="0" Margin="0,0,0,15" Orientation="Horizontal" HorizontalAlignment="SpaceBetween">
+                    <StackPanel Grid.Row="0" Margin="0,0,0,15" Orientation="Horizontal">
                         <TextBlock Text="Gestione Pacchetti WinGet" FontSize="24" FontWeight="Bold" Foreground="#FF38BDF8"/>
                     </StackPanel>
                     
