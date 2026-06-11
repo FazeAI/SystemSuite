@@ -1,5 +1,5 @@
 # =========================================================
-# SYSTEM SUITE - v6.0 ULTIMATE EDITION
+# SYSTEM SUITE - v6.0 ULTIMATE EDITION (HOTFIXED)
 # =========================================================
 Clear-Host
 Write-Host "Raccolta informazioni hardware in corso..." -ForegroundColor Cyan
@@ -87,7 +87,7 @@ Add-Type -AssemblyName PresentationFramework
                         <Border Background="#FF1E293B" CornerRadius="8" Padding="20" Margin="0,30,0,0">
                             <StackPanel>
                                 <TextBlock Text="🛡️ Sicurezza Pre-Configurazione" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-                                <TextBlock Text="Si consiglia di creare un punto di ripristino prima di applicare modifiche massive al registro di sistema." FoneSize="14" Foreground="#FF94A3B8" Margin="0,0,0,15" TextWrapping="Wrap"/>
+                                <TextBlock Text="Si consiglia di creare un punto di ripristino prima di applicare modifiche massive al registro di sistema." FontSize="14" Foreground="#FF94A3B8" Margin="0,0,0,15" TextWrapping="Wrap"/>
                                 <Button Name="BtnCreateRestore" Content="🛡️ Crea Punto di Ripristino del Sistema" Height="40" Background="#FF020617" Foreground="#FF38BDF8" BorderBrush="#FF38BDF8" BorderThickness="1" FontWeight="Bold" Cursor="Hand"/>
                             </StackPanel>
                         </Border>
